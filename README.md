@@ -18,6 +18,7 @@ Usage depends on the implementation, but usually involves:
 
 * syslog-ng >= 3.5
 * syslog-ng-incubator >= 0.3.3
+* [Search::Elasticsearch](http://search.cpan.org/dist/Search-Elasticsearch/lib/Search/Elasticsearch.pm)
 
 ### Features
 
