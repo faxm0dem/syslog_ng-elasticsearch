@@ -34,9 +34,9 @@ The plugin will allow you to send logs to Elasticsearch using the `perl` module 
 
 The `elasticsearch` block provided by this implementation exposes the following options:
 
-* `index` The name of the elasticsearch index prefix. The complete index name will be set to `\`index``-<timestamping-string>`. Defaults to `'syslog_ng'`
+* `index` The name of the elasticsearch index prefix. The complete index name will be set to `<index>-<timestamping-string>` where `<timestamping-string>` is determined from `timestamping` option (see below). Defaults to `'syslog_ng'`
 * `type` The type of the elasticsearch index. Defaults to `'syslog'`
 * `scope` The scope of name-value pairs to expose to elasticsearch
-* `exclude` Regex to exclude certain keys. Defaults to `'^(__|[A-Z])'`
+* `exclude` Regex to exclude certain keys. Defaults to `'^(__|[A-Z])'` in order to exclude capital syslog-ng macros and double underscore which are being used internally by the perl script.
 * `timestamping` String to determine the index date suffix. Any of `'daily'` (yields index name `\`index\`-YYYY.mm.dd` or `'monthly'` (yields index name `\`index\`-YYY.mm`. Defaults to `'daily'`.
 * `timestamp_field`Macro to use as `@timestamp` key in elasticsearch. Defaults to `'ISODATE'`
