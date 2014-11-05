@@ -25,10 +25,8 @@ Usage depends on the implementation, but usually involves:
 The plugin will allow you to send logs to Elasticsearch using the `perl` module from `syslog-ng-incubator`. It will among other things:
 
 * index your logs
-* split keys at the dot `.` in order to create nested structures. For instance if you have a `syslog_ng` macro `pdb.classifier.context_len` it will be indexed in json as `{"pdb": { "classifier" : { "context_len" : 42 } } }`
-* add `syslog` *namespace* e.g. common syslog macros like `$SEQNUM` will be indexed as `{"syslog":{"seqnum":1234}}`
 * create daily or monthly indices e.g. `syslog_ng-2014.10.03` based on UTC time
-* add `pdb` to prefix patterndb name-value pairs
+* remove the leading dot from special name-value pairs
 
 ### Configuration
 
@@ -36,7 +34,5 @@ The `elasticsearch` block provided by this implementation exposes the following 
 
 * `index` The name of the elasticsearch index prefix. The complete index name will be set to `<index>-<timestamping-string>` where `<timestamping-string>` is determined from `timestamping` option (see below). Defaults to `'syslog_ng'`
 * `type` The type of the elasticsearch index. Defaults to `'syslog'`
-* `scope` The scope of name-value pairs to expose to elasticsearch
-* `exclude` Regex to exclude certain keys. Defaults to `'^(__|[A-Z])'` in order to exclude capital syslog-ng macros and double underscore which are being used internally by the perl script.
+* `templaye` The template to use for the json data. Defaults to `"$(format-json -s all-nv-pairs -x __* -p @timestamp=$ISODATE --rekey .* --shift 1)")`
 * `timestamping` String to determine the index date suffix. Any of `'daily'` (yields index name `\`index\`-YYYY.mm.dd` or `'monthly'` (yields index name `\`index\`-YYY.mm`. Defaults to `'daily'`.
-* `timestamp_field`Macro to use as `@timestamp` key in elasticsearch. Defaults to `'ISODATE'`
