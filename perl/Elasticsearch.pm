@@ -6,8 +6,8 @@ use warnings;
 use strict;
 use Search::Elasticsearch;
 use Data::Dumper;
-use Data::Diver 'DiveVal';
 use Time::Piece;
+use Try::Tiny;
 
 my $es;
 my $bulk;
@@ -15,7 +15,6 @@ my %default;
 
 BEGIN {
 	%default = (
-		exclude => '^__',
 		index => "syslog-ng",
 		type => "syslog-ng",
 		max_count => 256,
@@ -54,19 +53,6 @@ sub init {
 	);
 }
 
-sub inflate_hash {
-	my ($hash,$exclude) = @_;
-	if (ref $hash ne "HASH") {
-		return
-	}
-	my $ihash = {};
-	while (my ($k,$v) = each %$hash) {
-		next if $exclude && $k =~ /$exclude/;
-		DiveVal($ihash, split m!\.!, $k) = $v;
-	}
-	return $ihash
-}
-
 sub queue_daily {
 	queue(@_, '%Y.%m.%d');
 }
@@ -80,19 +66,20 @@ sub queue {
 	$fmt ||= '%Y.%m.%d';
 	my $index = $input -> {__es_index};
 	my $type = $input -> {__es_type};
-	my $exclude = $input -> {__exclude} || $default{exclude};
 	my $dt = gmtime($input -> {__epoch});
 	my $fmt_str = $dt -> strftime($fmt);
 	$index = "${index}-$fmt_str";
 
-	my $data = inflate_hash(
-		$input,
-		$exclude,
-	);
-	
-	$bulk -> index(
-		{ index => $index, type => $type, source => $data }
-	);
+	my $data = $input -> {__json};
+
+	try {
+		$bulk -> create(
+			{ index => $index, type => $type, source => $data }
+		);
+	} catch {
+		my $e = $_ || "N/A";
+		warn "caught error: $e";
+	};
 }
 
 sub deinit {
