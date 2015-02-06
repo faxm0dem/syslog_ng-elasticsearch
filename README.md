@@ -12,6 +12,24 @@ Usage depends on the implementation, but usually involves:
 * editing the interpreted language files to suit your needs
 * copying the relevant configuration from the provided `syslog-ng.conf` file
 
+## Java
+
+### Requirements
+
+* syslog-ng >= 3.6
+* syslog-ng-incubator >= 0.4.1
+* elasticsearch >= 1.4.0
+
+### Features
+
+The plugin will allow you to send logs to Elasticsearch using the `java` module from `syslog-ng-incubator` and the native java client from the elasticsearch distribution.
+
+### Configuration
+
+* Install elasticsearch *e.g.* using RPM
+* Copy configuration files `java/plugin.conf` and `java/syslog-ng.conf` to relevant destinations
+* Modify elasticsearch, plugin and lucene jar paths according to your environment
+
 ## Perl
 
 ### Requirements
