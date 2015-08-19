@@ -1,3 +1,11 @@
+# Deprecation
+
+The release of 3.7.1 brings the native java plugin to life.
+This means the instructions in this article are obsolete.
+They can however be used as examples on how to use the perl and python drivers.
+
+The section on java was updated accordingly
+
 # Introduction
 
 This repository contains different implementations for sending logs to Elasticsearch
@@ -16,13 +24,12 @@ Usage depends on the implementation, but usually involves:
 
 ### Requirements
 
-* syslog-ng >= 3.6
-* syslog-ng-incubator >= 0.4.1
+* syslog-ng >= 3.7.1
 * elasticsearch >= 1.4.0
 
 ### Features
 
-The plugin will allow you to send logs to Elasticsearch using the `java` module from `syslog-ng-incubator` and the native java client from the elasticsearch distribution.
+The plugin will allow you to send logs to Elasticsearch using the `java` module from `syslog-ng-3.7.1` and the native java client from the elasticsearch distribution.
 
 ### Configuration
 
