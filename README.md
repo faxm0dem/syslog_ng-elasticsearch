@@ -25,6 +25,7 @@ Usage depends on the implementation, but usually involves:
 ### Requirements
 
 * syslog-ng >= 3.7.1
+* syslog-ng-java and jre >= 1.7
 * elasticsearch >= 1.4.0
 
 ### Features
@@ -36,6 +37,7 @@ The plugin will allow you to send logs to Elasticsearch using the `java` module 
 * Install elasticsearch *e.g.* using RPM
 * Copy configuration files `java/plugin.conf` and `java/syslog-ng.conf` to relevant destinations
 * Modify elasticsearch, plugin and lucene jar paths according to your environment
+* configure ldconfig or set `LD_LIBRARY_PATH` to the path of `libjvm.so`
 
 ## Perl
 
