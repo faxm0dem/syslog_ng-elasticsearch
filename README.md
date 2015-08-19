@@ -59,5 +59,5 @@ The `elasticsearch` block provided by this implementation exposes the following 
 
 * `index` The name of the elasticsearch index prefix. The complete index name will be set to `<index>-<timestamping-string>` where `<timestamping-string>` is determined from `timestamping` option (see below). Defaults to `'syslog_ng'`
 * `type` The type of the elasticsearch index. Defaults to `'syslog'`
-* `templaye` The template to use for the json data. Defaults to `"$(format-json -s all-nv-pairs -x __* -p @timestamp=$ISODATE --rekey .* --shift 1)")`
+* `template` The template to use for the json data. Defaults to `"$(format-json -s all-nv-pairs -x __* -p @timestamp=$ISODATE --rekey .* --shift 1)")`
 * `timestamping` String to determine the index date suffix. Any of `'daily'` (yields index name `\`index\`-YYYY.mm.dd` or `'monthly'` (yields index name `\`index\`-YYY.mm`. Defaults to `'daily'`.
