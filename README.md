@@ -63,3 +63,14 @@ The `elasticsearch` block provided by this implementation exposes the following 
 * `type` The type of the elasticsearch index. Defaults to `'syslog'`
 * `template` The template to use for the json data. Defaults to `"$(format-json -s all-nv-pairs -x __* -p @timestamp=$ISODATE --rekey .* --shift 1)")`
 * `timestamping` String to determine the index date suffix. Any of `'daily'` (yields index name `\`index\`-YYYY.mm.dd` or `'monthly'` (yields index name `\`index\`-YYY.mm`. Defaults to `'daily'`.
+
+# Appendix
+
+## Apache logs
+
+Using the python integration introduced by 3.7.1, we can also elegantly have apache send json logs.
+This could be done by crafting the JSON manually in apache.conf, but this approach has obvious issues
+with escaping special characters like `\` and `"` in the payload.
+
+The apache directory contains an example on how to achieve this
+
