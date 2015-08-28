@@ -1,0 +1,32 @@
+{
+   "template" : "*",
+   "order" : 0,
+   "mappings" : {
+      "_default_" : {
+         "properties" : {
+					 "geoip": {
+             "properties": {
+               "country_code" : {
+                 "index" : "not_analyzed",
+                 "doc_values": true,
+                 "type" : "string"
+               },
+               "latitude" : {
+                 "index" : "not_analyzed",
+                 "doc_values": true,
+                 "type" : "string"
+               },
+               "longitude" : {
+                 "index" : "not_analyzed",
+                 "doc_values": true,
+                 "type" : "string"
+               },
+							 "location" : {
+								 "type" : "geo_point"
+							 }
+             }
+           }
+	       }
+	    }
+   }
+}

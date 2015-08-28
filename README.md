@@ -74,3 +74,7 @@ with escaping special characters like `\` and `"` in the payload.
 
 The apache directory contains an example on how to achieve this
 
+## GeoIP
+
+In the geoip directory you will find an example on how to index geo points with Elasticsearch.
+
